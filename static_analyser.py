@@ -60,6 +60,45 @@ class PatternIdentifier:
     def check_patterns(tree: ast.AST, analyzer: StaticAnalyser) -> None:
         ConstantAreUppercaseChecker(tree, analyzer).check()
 
+# Pattern check for Prints/logging in Try blocks
+class LogsInTryBlockChecker(ast.NodeVisitor):
+    def __init__(self, tree: ast.AST, analyser: StaticAnalyser):
+        self.tree = tree
+        self.analyser = analyser
+        self.in_try_block = False
+
+    def check(self):
+        self.visit(self.tree)
+
+    def visit_Try(self, node: ast.Try):
+        old_in_try_block = self.in_try_block
+        self.in_try_block = True # Visit only the body of the try block and ignore except and finally
+        for stmt in node.body:
+            self.visit(stmt)
+        
+        self.in_try_block = old_in_try_block
+
+    def visit_Call(self, node: ast.Call):
+        if self.in_try_block:
+            stmt_type = None
+            if isinstance(node.func, ast.Name) and node.func.id == 'print':
+                stmt_type = 'print'
+            elif (isinstance(node.func, ast.Attribute) and
+                  isinstance(node.func.value, ast.Name) and
+                  node.func.value.id == 'logging'):
+                stmt_type = 'logging'
+            
+            if stmt_type:
+                explanation = (f"{stmt_type.capitalize()} statement found in "
+                               f"try block. Consider using proper error "
+                               f"logging in except or finally block instead.\n"
+                               f"Ignore, if it serves a needed purpose.")
+                self.analyser.report_issue(node.lineno, explanation)
+        
+        self.generic_visit(node)
+        
+
+# For learning purpose - wrote this common pattern 
 
 class ConstantAreUppercaseChecker(ast.NodeVisitor):
     def __init__(self, tree: ast.AST, analyser: StaticAnalyser):

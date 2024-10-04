@@ -57,8 +57,9 @@ class StaticAnalyser:
 
 class PatternIdentifier:
     @staticmethod
-    def check_patterns(tree: ast.AST, analyzer: StaticAnalyser) -> None:
-        ConstantAreUppercaseChecker(tree, analyzer).check()
+    def check_patterns(tree: ast.AST, analyser: StaticAnalyser) -> None:
+        LogsInTryBlockChecker(tree, analyser).check()
+        # ConstantAreUppercaseChecker(tree, analyser).check()
 
 # Pattern check for Prints/logging in Try blocks
 class LogsInTryBlockChecker(ast.NodeVisitor):
@@ -99,7 +100,6 @@ class LogsInTryBlockChecker(ast.NodeVisitor):
         
 
 # For learning purpose - wrote this common pattern 
-
 class ConstantAreUppercaseChecker(ast.NodeVisitor):
     def __init__(self, tree: ast.AST, analyser: StaticAnalyser):
         self.tree = tree

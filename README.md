@@ -1,6 +1,6 @@
 # Static Analyser - Identifying print/log statements in try blocks
 
-This tool finds print statements or logs in Python code that are created with try blocks. It grew out of a personal habit of keeping print/log statements in try blocks for debugging, and often forgetting to remove them before pushing to production 😅. (often happens with [JavaScript](https://github.com/fossunited/fossunited/pull/589#discussion_r1742236197) too)
+This tool **finds print statements or logs** in Python code that are **created within `try` blocks**. It grew out of a personal habit of keeping print/log statements in try blocks for debugging, and often forgetting to remove them before pushing to production 😅. (often happens with [JavaScript](https://github.com/fossunited/fossunited/pull/589#discussion_r1742236197) too)
 
 ## Why?
 

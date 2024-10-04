@@ -2,7 +2,7 @@ import argparse
 from static_analyser import PatternIdentifier, StaticAnalyser
 
 
-parser = argparse.ArgumentParser(description="Static Analysis Tool for Python Code")
+parser = argparse.ArgumentParser()
 parser.add_argument("filename", help="The Python file to analyze")
 parser.add_argument("-s", "--save", help="Output file for the report")
 args = parser.parse_args()

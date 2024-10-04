@@ -39,7 +39,7 @@ class StaticAnalyser:
             print(f"File: {self.filename}\n\n")
             for issue in self.report:
                 print(f"Line: {issue['line']}")
-                print(f"Issue: {issue['explanation']}")
+                print(f"💬💬: {issue['explanation']}")
                 print("-" * 40)
 
     # This can also be replaced with the `> output_file` in terminal
@@ -51,7 +51,7 @@ class StaticAnalyser:
                 file.write(f"File: {self.filename}\n\n")
                 for issue in self.report:
                     file.write(f"Line: {issue['line']}\n")
-                    file.write(f"Issue: {issue['explanation']}\n")
+                    file.write(f"💬💬: {issue['explanation']}\n")
                     file.write("-" * 40 + "\n")
         print(f"Report saved to {output_file}")
 

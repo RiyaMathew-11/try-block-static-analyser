@@ -1,26 +1,18 @@
-File: sample_test2.py
+File: sample_test_file.py
 
-Line: 10
-Issue: Constant variable 'gravity' should be in uppercase format.
-----------------------------------------
-Line: 11
-Issue: Constant variable 'max_connections' should be in uppercase format.
-----------------------------------------
 Line: 12
-Issue: Constant variable 'default_name' should be in uppercase format.
+💬💬: Print statement found in try block. Consider using proper error logging in except or finally block instead.
+Ignore, if it serves a needed purpose.
 ----------------------------------------
-Line: 13
-Issue: Constant variable 'is_active' should be in uppercase format.
+Line: 30
+💬💬: Print statement found in try block. Consider using proper error logging in except or finally block instead.
+Ignore, if it serves a needed purpose.
 ----------------------------------------
-Line: 16
-Issue: Constant variable 'count' should be in uppercase format.
+Line: 59
+💬💬: Print statement found in try block. Consider using proper error logging in except or finally block instead.
+Ignore, if it serves a needed purpose.
 ----------------------------------------
-Line: 17
-Issue: Constant variable 'name' should be in uppercase format.
-----------------------------------------
-Line: 26
-Issue: Constant variable 'internal_constant' should be in uppercase format.
-----------------------------------------
-Line: 37
-Issue: Constant variable 'long_message' should be in uppercase format.
+Line: 70
+💬💬: Print statement found in try block. Consider using proper error logging in except or finally block instead.
+Ignore, if it serves a needed purpose.
 ----------------------------------------

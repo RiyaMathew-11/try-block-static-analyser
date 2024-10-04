@@ -1,7 +1,6 @@
 import unittest
 import tempfile
 import os
-import ast
 from static_analyser import StaticAnalyser, PatternIdentifier
 
 class TestStaticAnalyser(unittest.TestCase):
@@ -15,7 +14,9 @@ class TestStaticAnalyser(unittest.TestCase):
     def analyse_code(self, code):
         with open(self.test_filename, 'w') as f:
             f.write(code)
-        analyser = StaticAnalyser(self.test_filename)
+        with open(self.test_filename, 'r') as f:
+            file_content = f.read()
+        analyser = StaticAnalyser(self.test_filename, file_content)
         analyser.analyse(PatternIdentifier())
         return analyser.report
     

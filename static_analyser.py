@@ -1,24 +1,15 @@
 import ast
-import sys
 from typing import List, Dict
 
 class StaticAnalyser:
-    def __init__(self, filename: str):
+    def __init__(self, filename: str, file_content: str):
         self.filename: str = filename
+        self.file_content: str = file_content
         self.tree: ast.AST = None
         self.report: List[Dict[str, str]] = []
 
-    def read_file(self) -> str:
-        try:
-            with open(self.filename, 'r', encoding='utf-8') as file:
-                return file.read()
-        except FileNotFoundError:
-            print(f"Error: File '{self.filename}' not found.")
-            sys.exit(1)
-
     def generate_ast(self) -> None:
-        file_content = self.read_file()
-        self.tree = ast.parse(file_content, filename=self.filename)
+        self.tree = ast.parse(self.file_content, filename=self.filename)
 
     def analyse(self, pattern_identifier: 'PatternIdentifier') -> None:
         if self.tree is None:
@@ -42,7 +33,6 @@ class StaticAnalyser:
                 print(f"💬💬: {issue['explanation']}")
                 print("-" * 40)
 
-    # This can also be replaced with the `> output_file` in terminal
     def save_report(self, output_file: str) -> None:
         with open(output_file, 'w', encoding='utf-8') as file:
             if not self.report:
@@ -54,7 +44,7 @@ class StaticAnalyser:
                     file.write(f"💬💬: {issue['explanation']}\n")
                     file.write("-" * 40 + "\n")
         print(f"Report saved to {output_file}")
-
+        
 class PatternIdentifier:
     @staticmethod
     def check_patterns(tree: ast.AST, analyser: StaticAnalyser) -> None:
